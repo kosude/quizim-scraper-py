@@ -1,0 +1,7 @@
+# specific editor configs
+.vscode/
+
+# python rubbish
+__pycache__/
+.venv/
+*.egg-info/
