@@ -5,3 +5,7 @@
 __pycache__/
 .venv/
 *.egg-info/
+
+# flask-assets bundle output
+out/
+.webassets-cache/

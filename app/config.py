@@ -8,13 +8,14 @@
 import os
 from app import quizimapp
 from views import templates_dir
+from static import static_dir
 
 # secret key for csrf protection
 CSRF_SECRET_KEY = os.urandom(32)
 quizimapp.config["SECRET_KEY"] = CSRF_SECRET_KEY
 
 # override static route
-quizimapp.static_folder = None
+quizimapp.static_folder = static_dir()
 
 # HTML/jinja templates folder
 quizimapp.template_folder = templates_dir()
