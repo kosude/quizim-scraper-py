@@ -1,0 +1,44 @@
+{% import "components/shared.jinja" as shared %}
+{% import "components/flashcards.jinja" as flashcards %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    {{ shared.head() }}
+
+    <body>
+        <div class="wrapper">
+            {{ shared.header(true) }}
+
+            <div class="content buffered">
+                <div class="ui-card" id="setid-prompt">
+                    <form>
+                        <div id="setid-formatted-block">
+                            <span>https://quizlet.com/</span>
+                            <input type="text" id="setid" name="setid" maxlength="150" value="{{ setid }}" placeholder="123456789/example-set/">
+                        </div>
+
+                        <input type="submit" id="import-btn" class="btn-purple-glow" value="Import">
+                    </form>
+
+                    {% if cardset %}
+                        <ul id="flashcard-list">
+                            {% for card in cardset.flashcards %}
+                                {{ flashcards.card(card) }}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <div class="error-post"></div>
+            </div>
+
+            <ul id="cardset" class="empty"></ul>
+
+            {{ shared.footer() }}
+        </div>
+
+        <script type="module" src="/static/js/global.js"></script>
+        <script type="module" src="/static/js/flashcards.js"></script>
+    </body>
+</html>

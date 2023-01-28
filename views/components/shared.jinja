@@ -16,12 +16,6 @@
 {% endmacro %}
 
 
-<!-- All global JS frontend script tags. -->
-{% macro scripts() %}
-    <script type="module" src="/static/js/app.js"></script>
-{% endmacro %}
-
-
 <!-- Global navigation bar and header. -->
 {% macro header(integrated) %}
     <header
@@ -33,7 +27,7 @@
             <img class="quizim-logo-full" src="/static/img/quizim_full_col.svg">
         </div>
         <ul id="header-elem-navbar">
-            <a style="--i: 0" href="/" class="btn-purple-glow">Home</a>
+            <a style="--i: 0" href="/home" class="btn-purple-glow">Home</a>
             <a style="--i: 1" href="/flashcards" class="btn-purple-glow">Flashcards</a>
         </ul>
         <div id="header-elem-burger">

@@ -28,12 +28,13 @@
         #setid-formatted-block {
             display: flex;
 
-            width: 27rem;
+            justify-content: center;
+            max-width: 90%;
 
             span {
                 color: rgb(100, 100, 100);
                 font-family: $font-fira-code;
-                font-size: 1.4rem;
+                font-size: 1.2rem;
 
                 margin-top: 0.25rem;
             }
@@ -42,9 +43,9 @@
                 background: none;
                 color: white;
                 font-family: $font-fira-code;
-                font-size: 1.4rem;
+                font-size: 1.2rem;
 
-                width: 100%;
+                min-width: 18rem;
 
                 outline: none;
                 border-color: transparent;
@@ -64,11 +65,13 @@
                 &:focus {
                     box-shadow: 0 0.2rem 0.9rem $col-purple-dark;
                 }
+
+                @media (max-width: $max-width-mobile-first) {
+                    min-width: 0;
+                }
             }
 
             @media (max-width: $max-width-mobile-first) {
-                width: 90%;
-
                 span {
                     display: none;
                 }
