@@ -14,4 +14,3 @@ quizimassets = Environment(quizimapp)
 import app.config
 import app.assets
 import app.routes
-import app.static_serve

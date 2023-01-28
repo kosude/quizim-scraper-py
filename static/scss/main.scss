@@ -5,8 +5,9 @@
  *   Please see the LICENCE file for more information.
  */
 
-$bg: #f00;
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
 
-body {
-    background-color: $bg;
-}
+@import "global.scss";
+@import "header-footer.scss";
+@import "flashcards.scss";

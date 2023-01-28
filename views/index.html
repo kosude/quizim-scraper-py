@@ -1,20 +1,21 @@
+{% import "components/shared.jinja" as shared %}
+
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <title>Quizim WebApp</title>
-
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        {% assets "all_scss" %}
-            <link rel="stylesheet" typ="text/css" href="{{ ASSET_URL }}">
-        {% endassets %}
-    </head>
+    {{ shared.head() }}
 
     <body>
-        <h1>Keeping Education Open</h1>
-        <h2><i>Introducing Quizim.</i></h2>
+        <div class="wrapper">
+            {{ shared.header(true) }}
+
+            <div class="content">
+                Some content.
+            </div>
+
+            {{ shared.footer() }}
+        </div>
+
+        {{ shared.scripts() }}
     </body>
 </html>
