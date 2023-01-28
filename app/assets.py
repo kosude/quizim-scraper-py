@@ -5,13 +5,11 @@
 #   Please see the LICENCE file for more information.
 #
 
-import flask
 from flask_assets import Bundle
-from app import quizimassets
-import static
+from app import quizimassets, dirs
 
 quizimassets.url = "/static"
-quizimassets.directory = static.static_dir()
+quizimassets.directory = dirs.static()
 
 # Sass/SCSS asset compilation + bundling
 scss = Bundle(

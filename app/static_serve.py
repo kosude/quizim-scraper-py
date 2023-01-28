@@ -6,16 +6,15 @@
 #
 
 import flask
-from app import quizimapp
-import static
+from app import quizimapp, dirs
 
 # accessing images (shorthand; essentially the same as /static/img/...)
 # (images)
 @quizimapp.route("/img/<path:filename>")
 def image_serve(filename: str) -> flask.Response:
-    return flask.send_from_directory(static.image_dir(), filename)
+    return flask.send_from_directory(dirs.image(), filename)
 
 # favicon route for compatibility
 @quizimapp.route("/favicon.ico")
 def favicon() -> flask.Response:
-    return flask.send_from_directory(static.image_dir(), "favicon.png")
+    return flask.send_from_directory(dirs.image(), "favicon.png")
