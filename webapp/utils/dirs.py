@@ -6,19 +6,18 @@
 #
 
 import os
-from webapp import app
 
 # static/ folder path.
 # Includes SCSS, JS, etc...
-def static() -> str:
-    return os.path.join(app.root_path, "static")
+def static(root_path: str) -> str:
+    return os.path.join(root_path, "static")
 
 # static/img/ folder path.
 # includes image resources
-def image() -> str:
-    return os.path.join(app.root_path, "static", "img")
+def image(root_path: str) -> str:
+    return os.path.join(root_path, "static", "img")
 
 # views/ folder path.
 # includes HTML/jinja2 components and templates.
-def templates() -> str:
-    return os.path.join(app.root_path, "views")
+def templates(root_path: str) -> str:
+    return os.path.join(root_path, "views")

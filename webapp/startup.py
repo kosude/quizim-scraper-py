@@ -5,10 +5,54 @@
 #   Please see the LICENCE file for more information.
 #
 
+import os
 import flask
-from webapp import app, dirs
-from webapp.session import *
+from flask_assets import Environment, Bundle
+from .utils import *
 from lib import *
+
+
+#
+## configure application
+
+app = flask.Flask("quizimapp")
+
+app.template_folder = dirs.templates(app.root_path)
+app.static_folder = dirs.static(app.root_path)
+
+# secret key for csrf protection
+CSRF_SECRET_KEY = os.urandom(32)
+app.config["SECRET_KEY"] = CSRF_SECRET_KEY
+
+# session cookie config
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_SAMESITE="Lax"
+)
+
+
+#
+## register assets to be compiled and/or bundled
+
+quizimassets = Environment(app)
+quizimassets.cache = False
+quizimassets.manifest = False
+
+quizimassets.url = "/static"
+quizimassets.directory = dirs.static(app.root_path)
+
+# Sass/SCSS asset compilation + bundling
+scss = Bundle(
+    "scss/main.scss",
+    depends=("scss/**/*.scss"),
+    filters="pyscss",
+    output="out/style.css"
+)
+quizimassets.register("all_scss", scss)
+
+
+#
+## configure HTTP routes
 
 # favicon route for compatibility
 @app.route("/favicon.ico")
