@@ -29,6 +29,9 @@ def home() -> flask.Response:
 @quizimapp.route("/flashcards", methods=["GET", "POST"])
 def flashcards() -> flask.Response:
     if flask.request.method == "POST":
+        # clear to avoid exceeding maximum session cookie size
+        flask.session.clear()
+
         id = flask.request.form["setid"]
         set_session_setid(id)
 

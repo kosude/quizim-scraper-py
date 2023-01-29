@@ -12,7 +12,8 @@ from .flashcard import *
 from .log import *
 
 def get_set_url_from_id(id: str) -> str:
-    return f"https://quizlet.com/{id}"
+    # for whatever reason Quizlet wants a string after the id hence appending '/a/' to the url
+    return f"https://quizlet.com/{id}/a/"
 
 # Scrape the specified quizlet URL for a set of flashcards.
 def scrape_quizlet_set(url: str) -> Set:

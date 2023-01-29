@@ -18,5 +18,8 @@ quizimapp.static_folder = dirs.static()
 # HTML/jinja templates folder
 quizimapp.template_folder = dirs.templates()
 
-print(quizimapp.static_folder)
-print(quizimapp.template_folder)
+# session cookie config
+quizimapp.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_SAMESITE="Lax"
+)

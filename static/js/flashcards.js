@@ -20,20 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
             body: data
         }).then((response) => {
             if (response.status == 200) {
-                document.open();
-                response.text().then((t) => {
-                    document.write(t);
-                })
+                window.location.reload();
             }
         })
     });
-
-    // resize id input prompt to fit text
-    let importPrompt = document.querySelector("#setid-prompt form #setid");
-    importPrompt.addEventListener("input", resizeImportPromptFit);
-    resizeImportPromptFit();
-
-    function resizeImportPromptFit() {
-        importPrompt.style.width = (importPrompt.value.length + 1) + "ch";
-    }
 });
