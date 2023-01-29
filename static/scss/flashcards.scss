@@ -72,6 +72,9 @@
             }
 
             @media (max-width: $max-width-mobile-first) {
+                width: 10rem;
+                max-width: 90%;
+
                 span {
                     display: none;
                 }
