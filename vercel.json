@@ -1,9 +1,15 @@
 {
     "builds": [
-        { "src": "app/__init__.py", "use": "@vercel/python" }
+        {
+            "src": "webapp/__init__.py",
+            "use": "@vercel/python"
+        }
     ],
     "routes": [
-        { "src": "/(.*)", "dest": "app/__init__.py" }
+        {
+            "src": "/(.*)",
+            "dest": "webapp/__init__.py"
+        }
     ],
     "github": {
         "silent": true

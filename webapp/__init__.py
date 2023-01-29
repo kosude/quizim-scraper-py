@@ -8,9 +8,9 @@
 from flask import Flask
 from flask_assets import Environment
 
-quizimapp = Flask("quizimapp")
-quizimassets = Environment(quizimapp)
+app = Flask("quizimapp")
+quizimassets = Environment(app)
 
-import app.config
-import app.assets
-import app.routes
+import webapp.config
+import webapp.assets
+import webapp.routes

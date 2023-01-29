@@ -6,19 +6,19 @@
 #
 
 import os
-from app import quizimapp
+from webapp import app
 
 # static/ folder path.
 # Includes SCSS, JS, etc...
 def static() -> str:
-    return os.path.join(quizimapp.root_path, "static")
+    return os.path.join(app.root_path, "static")
 
 # static/img/ folder path.
 # includes image resources
 def image() -> str:
-    return os.path.join(quizimapp.root_path, "static", "img")
+    return os.path.join(app.root_path, "static", "img")
 
 # views/ folder path.
 # includes HTML/jinja2 components and templates.
 def templates() -> str:
-    return os.path.join(quizimapp.root_path, "views")
+    return os.path.join(app.root_path, "views")

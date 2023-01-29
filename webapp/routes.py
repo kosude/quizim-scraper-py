@@ -6,27 +6,27 @@
 #
 
 import flask
-from app import quizimapp, dirs
-from app.session import *
+from webapp import app, dirs
+from webapp.session import *
 from lib import *
 
 # favicon route for compatibility
-@quizimapp.route("/favicon.ico")
+@app.route("/favicon.ico")
 def favicon() -> flask.Response:
     return flask.send_from_directory(dirs.image(), "favicon.png")
 
 # index: redirect to the homepage, assume javascript enabled
-@quizimapp.route("/")
+@app.route("/")
 def index() -> flask.Response:
     return flask.render_template("index.html")
 
 # home page
-@quizimapp.route("/home")
+@app.route("/home")
 def home() -> flask.Response:
     return flask.render_template("home.html")
 
 # flashcards learning page
-@quizimapp.route("/flashcards", methods=["GET", "POST"])
+@app.route("/flashcards", methods=["GET", "POST"])
 def flashcards() -> flask.Response:
     if flask.request.method == "POST":
         # clear to avoid exceeding maximum session cookie size

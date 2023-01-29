@@ -6,7 +6,7 @@
 #
 
 from flask_assets import Bundle
-from app import quizimassets, dirs
+from webapp import quizimassets, dirs
 
 quizimassets.url = "/static"
 quizimassets.directory = dirs.static()

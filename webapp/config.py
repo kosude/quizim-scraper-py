@@ -6,20 +6,20 @@
 #
 
 import os
-from app import quizimapp, dirs
+from webapp import app, dirs
 
 # secret key for csrf protection
 CSRF_SECRET_KEY = os.urandom(32)
-quizimapp.config["SECRET_KEY"] = CSRF_SECRET_KEY
+app.config["SECRET_KEY"] = CSRF_SECRET_KEY
 
 # override static route
-quizimapp.static_folder = dirs.static()
+app.static_folder = dirs.static()
 
 # HTML/jinja templates folder
-quizimapp.template_folder = dirs.templates()
+app.template_folder = dirs.templates()
 
 # session cookie config
-quizimapp.config.update(
+app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_SAMESITE="Lax"
 )
