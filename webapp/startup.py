@@ -58,11 +58,11 @@ def flashcards() -> flask.Response:
         # clear to avoid exceeding maximum session cookie size
         flask.session.clear()
 
-        id = flask.request.form["setid"]
-        set_session_setid(id)
-
-        url = get_set_url_from_id(id)
+        url = flask.request.data.decode("utf-8")
         set_session_cardset(scrape_quizlet_set(url))
+
+        # id = flask.request.data.decode("utf-8")
+        # set_session_setid(id)
 
         return flask.redirect(flask.url_for("flashcards"))
 
