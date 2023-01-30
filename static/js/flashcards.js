@@ -12,12 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     importForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const data = new FormData(importForm);
-        console.log(data);
+        let data = new FormData(importForm);
+
+        const url = `https://quizlet.com/${data.get("setid")}/abc/`
 
         fetch("/flashcards", {
             method: "POST",
-            body: data
+            body: url
         }).then((response) => {
             if (response.status == 200) {
                 window.location.reload();

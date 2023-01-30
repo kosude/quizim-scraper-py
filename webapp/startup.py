@@ -7,7 +7,6 @@
 
 import os
 import flask
-from flask_assets import Environment, Bundle
 from .utils import *
 from lib import *
 
@@ -32,32 +31,15 @@ app.config.update(
 
 
 #
-## register assets to be compiled and/or bundled
-
-quizimassets = Environment(app)
-quizimassets.cache = False
-quizimassets.manifest = False
-
-quizimassets.url = "/static"
-quizimassets.directory = dirs.static(app.root_path)
-
-# Sass/SCSS asset compilation + bundling
-scss = Bundle(
-    "scss/main.scss",
-    depends=("scss/**/*.scss"),
-    filters="pyscss",
-    output="out/style.css"
-)
-quizimassets.register("all_scss", scss)
-
-
-#
 ## configure HTTP routes
+
+# linked to compiled + bundled css file
+STYLE_CSS_SRC = os.path.join(dirs.rel_compiled(), "style.css")
 
 # favicon route for compatibility
 @app.route("/favicon.ico")
 def favicon() -> flask.Response:
-    return flask.send_from_directory(dirs.image(), "favicon.png")
+    return flask.send_from_directory(dirs.image(app.root_path), "favicon.png")
 
 # index: redirect to the homepage, assume javascript enabled
 @app.route("/")
@@ -67,7 +49,7 @@ def index() -> flask.Response:
 # home page
 @app.route("/home")
 def home() -> flask.Response:
-    return flask.render_template("home.html")
+    return flask.render_template("home.html", style_css_src=STYLE_CSS_SRC)
 
 # flashcards learning page
 @app.route("/flashcards", methods=["GET", "POST"])
@@ -76,12 +58,12 @@ def flashcards() -> flask.Response:
         # clear to avoid exceeding maximum session cookie size
         flask.session.clear()
 
-        id = flask.request.form["setid"]
-        set_session_setid(id)
-
-        url = get_set_url_from_id(id)
+        url = flask.request.data.decode("utf-8")
         set_session_cardset(scrape_quizlet_set(url))
+
+        # id = flask.request.data.decode("utf-8")
+        # set_session_setid(id)
 
         return flask.redirect(flask.url_for("flashcards"))
 
-    return flask.render_template("flashcards.html", cardset=get_session_cardset(), setid=get_session_setid())
+    return flask.render_template("flashcards.html", cardset=get_session_cardset(), setid=get_session_setid(), style_css_src=STYLE_CSS_SRC)

@@ -1,6 +1,6 @@
 <!-- Shared <head> tag across all templates. -->
 <!-- Includes all necessary shared styelsheets. -->
-{% macro head() %}
+{% macro head(style_css_src) %}
     <head>
         <title>Quizim WebApp</title>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -9,9 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% assets "all_scss" %}
-            <link rel="stylesheet" typ="text/css" href="{{ ASSET_URL }}">
-        {% endassets %}
+        <link rel="stylesheet" typ="text/css" href="{{ style_css_src }}">
     </head>
 {% endmacro %}
 

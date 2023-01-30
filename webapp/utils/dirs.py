@@ -21,3 +21,8 @@ def image(root_path: str) -> str:
 # includes HTML/jinja2 components and templates.
 def templates(root_path: str) -> str:
     return os.path.join(root_path, "views")
+
+# relative compiled output folder path.
+# e.g. CSS (compiled from SCSS)
+def rel_compiled() -> str:
+    return os.path.join("static", "out")

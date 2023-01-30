@@ -10,8 +10,5 @@
             "src": "/(.*)",
             "dest": "webapp/startup.py"
         }
-    ],
-    "github": {
-        "silent": true
-    }
+    ]
 }

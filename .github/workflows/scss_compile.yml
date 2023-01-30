@@ -1,0 +1,56 @@
+name: Compile SCSS to deployment branch
+
+on:
+  push:
+    branches: [ master ]
+  # repository_dispatch:
+  #   types: [ trigger-scss-compilation ]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.client_payload.sha }}
+          token: ${{ secrets.ACTIONS_KEY }}
+
+      - run: |
+          mkdir -vp /tmp/quizim/static/out
+
+      - name: Compile Sass/SCSS to CSS
+        uses: gha-utilities/sass-build@v0.4.11
+        with:
+          source: ./static/scss/main.scss
+          destination: /tmp/quizim/static/out/style.css
+
+      - name: Save master state
+        run: |
+          cp -r . /tmp/quizim
+
+      - name: Checkout destination branch
+        uses: actions/checkout@v3
+        with:
+          ref: vercel-deploy
+          token: ${{ secrets.ACTIONS_KEY }}
+
+      - name: Move compiled CSS and other files to destination branch
+        run: |
+          rm -rf *
+          rm -rf .gitkeep .gitattributes .gitignore .editorconfig
+          mv /tmp/quizim/* .
+
+      - name: Commit changes to destination branch
+        run : |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Compiled stylesheets"
+
+      - name: Push compilation output
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACTIONS_KEY }}
+          branch: vercel-deploy

@@ -9,3 +9,6 @@ __pycache__/
 # flask-assets bundle output
 out/
 .webassets-cache/
+
+# vercel-link project info (sensitive)
+.vercel
